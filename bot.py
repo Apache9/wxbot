@@ -7,7 +7,7 @@ from wxpy import *
 
 cf = ConfigParser.SafeConfigParser()
 cf.read(".config")
-group_name=cf.get("all", "group_name")
+group_name=unicode(cf.get("all", "group_name"), 'utf-8')
 cache_path=cf.get("all", "cache_path")
 db_path=cf.get("all", "db_path")
 

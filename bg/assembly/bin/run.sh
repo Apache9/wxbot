@@ -12,4 +12,4 @@ CLASSPATH=${CLASSPATH}:conf;
 
 export CLASSPATH
 
-java -Xms512m -Xmx512m -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps $@
+java -Xms512m -Xmx512m -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps com.github.apache9.wxbot.Driver $@

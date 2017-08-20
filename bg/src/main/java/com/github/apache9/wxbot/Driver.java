@@ -41,6 +41,7 @@ public class Driver implements Closeable {
                     Thread.interrupted();
                     return;
                 }
+                continue;
             }
             Message m = msg.get();
             for (MessageProcessor processor : processors) {

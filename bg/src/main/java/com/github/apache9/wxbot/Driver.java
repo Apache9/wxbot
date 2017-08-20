@@ -26,7 +26,7 @@ public class Driver implements Closeable {
     }
 
     public void exec() {
-        for (;;) {
+        outer: for (;;) {
             Optional<Message> msg = Optional.empty();
             try {
                 msg = store.poll();
@@ -58,8 +58,14 @@ public class Driver implements Closeable {
                     } catch (Exception e) {
                         LOG.warn(() -> "failed to send " + toSend.get(), e);
                     }
-                    break;
+                    continue outer;
                 }
+            }
+            LOG.warn("no processor for %s", m);
+            try {
+                store.send(new Message("", "TEXT", "不好意思，我没听懂", ""));
+            } catch (Exception e) {
+                LOG.warn("failed to send no reply", e);
             }
         }
     }

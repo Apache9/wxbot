@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class Driver implements Closeable {
 
-    private static final Logger LOG = LogManager.getLogger(Driver.class);
+    private static final Logger LOG = LogManager.getFormatterLogger(Driver.class);
 
     private final MessageStore store;
 

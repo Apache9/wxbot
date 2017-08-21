@@ -4,7 +4,6 @@ import java.util.Optional;
 
 /**
  * @author Apache9
- *
  */
 public interface MessageProcessor {
 

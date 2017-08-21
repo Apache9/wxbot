@@ -16,7 +16,9 @@ import org.apache.logging.log4j.Logger;
  */
 public class MessageStore implements Closeable {
 
-    private static final Logger LOG = LogManager.getLogger(MessageStore.class);
+    private static final int PREFIX_LENGTH = 6;
+
+    private static final Logger LOG = LogManager.getFormatterLogger(MessageStore.class);
 
     private final Connection conn;
 
@@ -46,9 +48,8 @@ public class MessageStore implements Closeable {
                 String messageId = rst.getString("MSG_ID");
                 String type = rst.getString("TYPE");
                 String content = rst.getString("CONTENT");
-                int idx = content.indexOf(' ');
                 String member = rst.getString("MEMBER");
-                message = new Message(messageId, type, content.substring(idx + 1), member);
+                message = new Message(messageId, type, content.substring(PREFIX_LENGTH), member);
                 LOG.info("Message received: %s", message);
             }
         }
@@ -61,7 +62,7 @@ public class MessageStore implements Closeable {
 
     public void send(Message msg) throws SQLException {
         try (Connection conn = DriverManager.getConnection(dbUrl);
-                PreparedStatement pst = conn.prepareStatement("INSERT INTO Send (TYPE. CONTENT) VALUES (?, ?)")) {
+                PreparedStatement pst = conn.prepareStatement("INSERT INTO Send (TYPE, CONTENT) VALUES (?, ?)")) {
             pst.setString(1, msg.getType());
             pst.setString(2, msg.getContent());
             pst.executeUpdate();

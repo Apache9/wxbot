@@ -2,7 +2,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.apache9.wxbot</groupId>
-    <artifactId>wxbot</artifactId>
+    <artifactId>wxbot-bg</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
@@ -68,7 +68,8 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <finalName>wxbot</finalName>
+                    <finalName>wxbot-bg</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
                     <descriptors>
                         <descriptor>assembly/assembly.xml</descriptor>
                     </descriptors>

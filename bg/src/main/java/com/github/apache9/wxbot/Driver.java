@@ -63,7 +63,7 @@ public class Driver implements Closeable {
             }
             LOG.warn("no processor for %s", m);
             try {
-                store.send(new Message("", "TEXT", "不好意思，我没听懂", ""));
+                store.send(new Message("", "TEXT", "@" + m.getMember() + " 不好意思，我没听懂", ""));
             } catch (Exception e) {
                 LOG.warn("failed to send no reply", e);
             }

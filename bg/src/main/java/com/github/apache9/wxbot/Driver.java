@@ -1,6 +1,8 @@
 package com.github.apache9.wxbot;
 
 import java.io.Closeable;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
@@ -20,9 +22,10 @@ public class Driver implements Closeable {
 
     private final List<MessageProcessor> processors;
 
-    public Driver(String dbFile) throws SQLException {
-        this.store = new MessageStore(dbFile);
-        this.processors = Arrays.asList(new IpProcessor());
+    public Driver(Config conf) throws SQLException {
+        this.store = new MessageStore(conf.msgDbPath);
+        this.processors = Arrays.asList(new IpProcessor(), new CreditCardProcessor(conf.financeDbPath),
+                new DebitCardProcessor(conf.financeDbPath));
     }
 
     public void exec() {
@@ -75,10 +78,9 @@ public class Driver implements Closeable {
         store.close();
     }
 
-    public static void main(String[] args) throws SQLException {
-        try (Driver driver = new Driver(args[0])) {
+    public static void main(String[] args) throws SQLException, IOException {
+        try (Driver driver = new Driver(new Config(new File(args[0])))) {
             driver.exec();
         }
     }
-
 }

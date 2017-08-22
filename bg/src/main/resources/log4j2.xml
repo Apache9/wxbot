@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN">
-    <Properties>
-        <Property name="filepath">logs</Property>
-        <Property name="patternTime"></Property>
-    </Properties>
     <Appenders>
         <RollingFile name="RollingFile" fileName="logs/bot.log"
-            filePattern="${filepath}/logs/app-%d{yyyy-MM-dd}.log">
+            filePattern="logs/bot-%d{yyyy-MM-dd}.log">
             <PatternLayout
                 pattern="%d{yyyy-mm-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
             <Policies>

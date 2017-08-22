@@ -19,6 +19,6 @@ public class Config {
         Properties props = new Properties();
         props.load(Files.newBufferedReader(file.toPath(), StandardCharsets.UTF_8));
         msgDbPath = props.getProperty("msg_db_path");
-        financeDbPath = props.getProperty("financeDbPath");
+        financeDbPath = props.getProperty("finance_db_path");
     }
 }

@@ -22,7 +22,7 @@ public class IpProcessor implements MessageProcessor {
         String content = Jsoup
                 .parse(Request.Get("http://www.ip.cn").userAgent(USER_AGENT).execute().returnContent().asString())
                 .getElementById("result").getElementsByTag("p").stream().map(e -> e.text())
-                .collect(Collectors.joining("\r\n", "@" + msg.getMember() + " ", ""));
+                .collect(Collectors.joining("\n", "@" + msg.getMember() + " ", ""));
         return Optional.of(new Message("", "TEXT", content, ""));
     }
 

@@ -46,18 +46,18 @@ public class CreditCardProcessor implements MessageProcessor {
                     int repaymentDate = rst.getInt("REPAYMENT_DATE");
                     if (bank.contains(toMatch) || owner.contains(toMatch) || number.endsWith(toMatch)) {
                         StringBuilder sb = new StringBuilder();
-                        sb.append("户名：").append(owner).append("\r\n");
-                        sb.append("开户行：").append(bank).append("\r\n");
-                        sb.append("卡号：").append(CardUtils.formatCardNumber(number)).append("\r\n");
-                        sb.append("账单日：每月").append(billDate).append("号\r\n");
-                        sb.append("还款日：每月").append(repaymentDate).append("号\r\n");
+                        sb.append("户名：").append(owner).append("\n");
+                        sb.append("开户行：").append(bank).append("\n");
+                        sb.append("卡号：").append(CardUtils.formatCardNumber(number)).append("\n");
+                        sb.append("账单日：每月").append(billDate).append("号\n");
+                        sb.append("还款日：每月").append(repaymentDate).append("号\n");
                         cards.add(sb.toString());
                     }
                 }
             }
             if (!cards.isEmpty()) {
                 return Optional.of(new Message("", "TEXT",
-                        cards.stream().collect(Collectors.joining("\r\n", "@" + msg.getMember() + " ", "")), ""));
+                        cards.stream().collect(Collectors.joining("\n", "@" + msg.getMember() + " ", "")), ""));
             }
         }
         return Optional.of(new Message("", "TEXT", "@" + msg.getMember() + " 没有查询到匹配的信用卡信息", ""));
